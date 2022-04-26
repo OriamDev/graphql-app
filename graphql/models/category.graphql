@@ -1,0 +1,35 @@
+type Category
+{
+    id: ID!
+    name: String!,
+    slug: String!
+    products: [Product!] @hasMany
+}
+
+extend type Query
+{
+    categories: [Category!] @all
+    category(
+        id: ID @eq @rules(apply: ["prohibits:slug", "required_without:slug"])
+        slug: String @eq @rules(apply: ["prohibits:id", "required_without:id"])
+    ): Category @find
+}
+
+extend type Mutation
+{
+    createCategory(input: CategoryInput! @spread): Category @create
+    updateCategory(input: CategoryUpdateInput! @spread): Category @update
+    deleteCategory(id: ID!): Category @delete
+}
+
+input CategoryInput
+{
+    name: String! @rules(apply: ["string", "unique:categories,name"])
+}
+
+input CategoryUpdateInput @validator
+{
+    id: ID!
+    name: String!
+    slug: String!
+}

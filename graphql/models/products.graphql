@@ -1,0 +1,19 @@
+type Product
+{
+    id: ID!
+    name: String!
+    slug: String!
+    price: Int
+    category: Category! @belongsTo
+}
+
+
+extend type Query
+{
+    products: [Product!] @paginate(defaultCount: 10)
+    product(
+        id: ID @eq @rules(apply: ["prohibits:slug", "required_without:slug"])
+
+        slug: String @eq @rules(apply: ["prohibits:id", "required_without:id"])
+    ): Product @find
+}
