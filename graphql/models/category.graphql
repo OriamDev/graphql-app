@@ -31,5 +31,4 @@ input CategoryUpdateInput @validator
 {
     id: ID!
     name: String!
-    slug: String!
 }

@@ -24,13 +24,13 @@ values. Int can represent values between -(2^31) and 2^31 - 1.
 """
 scalar Int
 
-"""A paginated list of User items."""
-type UserPaginator {
+"""A paginated list of Product items."""
+type ProductPaginator {
   """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """A list of User items."""
-  data: [User!]!
+  """A list of Product items."""
+  data: [Product!]!
 }
 
 """Information about pagination using a fully featured paginator."""
