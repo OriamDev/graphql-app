@@ -10,7 +10,7 @@ type Product
 
 extend type Query
 {
-    products: [Product!] @paginate(defaultCount: 10)
+    products: [Product!] @paginate(defaultCount: 3)
     product(
         id: ID @eq @rules(apply: ["prohibits:slug", "required_without:slug"])
 

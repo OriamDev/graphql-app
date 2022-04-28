@@ -3,12 +3,13 @@ type Category
     id: ID!
     name: String!,
     slug: String!
-    products: [Product!] @hasMany
+    status: Int!
+    products: [Product!] @hasMany(type: PAGINATOR)
 }
 
 extend type Query
 {
-    categories: [Category!] @all
+    categories: [Category!] @paginate(defaultCount: 3)
     category(
         id: ID @eq @rules(apply: ["prohibits:slug", "required_without:slug"])
         slug: String @eq @rules(apply: ["prohibits:id", "required_without:id"])
@@ -25,10 +26,12 @@ extend type Mutation
 input CategoryInput
 {
     name: String! @rules(apply: ["string", "unique:categories,name"])
+    status: Int @rules(apply: ["int", "min:0", "max:1"])
 }
 
 input CategoryUpdateInput @validator
 {
     id: ID!
-    name: String!
+    name: String
+    status: Int
 }
