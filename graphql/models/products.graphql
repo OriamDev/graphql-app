@@ -7,7 +7,6 @@ type Product
     category: Category! @belongsTo
 }
 
-
 extend type Query
 {
     products: [Product!] @paginate(defaultCount: 3)

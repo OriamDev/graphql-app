@@ -28,3 +28,5 @@ Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->
 
 Route::get('products', [ProductController::class, 'index'])->name('api.products.index');
 Route::get('products/{product}', [ProductController::class, 'show'])->name('api.products.show');
+
+
