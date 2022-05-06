@@ -19,12 +19,17 @@ class CategoryController extends Controller
 
     public function index(): CategoryCollection
     {
-        return CategoryCollection::make(Category::paginate(
+
+        $categories = Category::when(request('fields'), function ($query){
+            $query->select(explode(',',request('fields')));
+        })->paginate(
             $perPage = request('page.size', 5),
             $columns = ['*'],
             $pageName = 'page[number]',
             $page = request('page.number', 1)
-        ));
+        );
+
+        return CategoryCollection::make($categories);
     }
 
     public function create(Request $request): CategoryResource
