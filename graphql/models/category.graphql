@@ -9,7 +9,7 @@ type Category
 
 extend type Query
 {
-    categories: [Category!] @paginate(defaultCount: 3)
+    categories: [Category!]! @paginate(defaultCount: 3)
     category(
         id: ID @eq @rules(apply: ["prohibits:slug", "required_without:slug"])
         slug: String @eq @rules(apply: ["prohibits:id", "required_without:id"])
